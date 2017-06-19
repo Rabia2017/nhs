@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'war'
+
+
+archivesBaseName = 'NHS'
+version = '1.0-SNAPSHOT'
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.1.RELEASE'
+    compile 'jstl:jstl:1.2'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.1.4.RELEASE'
+    compile 'org.hibernate:hibernate-core:4.3.6.Final'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'org.slf4j:slf4j-simple:1.7.7'
+    compile 'org.javassist:javassist:3.15.0-GA'
+    compileOnly('org.projectlombok:lombok:1.16.8')
+    runtime("org.postgresql:postgresql:9.3-1102-jdbc4")
+    compile 'commons-dbcp:commons-dbcp:1.4'
+
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.8.4'
+    testCompile 'junit:junit:4.12'
+    // Optional -- Mockito framework
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile group: 'com.github.springtestdbunit', name: 'spring-test-dbunit', version: '1.0.1'
+}
+
+war.archiveName 'nhs.war'
