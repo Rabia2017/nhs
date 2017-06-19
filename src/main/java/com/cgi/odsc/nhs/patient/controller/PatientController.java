@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 @NoArgsConstructor
 @Slf4j
 public class PatientController {
-    //@Autowired
+    @Autowired
     private IPatientService patientService;
 
     void PatientController(IPatientService patientService){
