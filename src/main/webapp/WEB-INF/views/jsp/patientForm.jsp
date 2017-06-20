@@ -21,8 +21,8 @@
         <tr>
             <td ><form:label path="name">Patient Name:</form:label></td>
 
-            <td ><form:input id="name" path="name" value="${patient.name}"/></td>
-            <form:errors path="name" />
+            <td ><form:input id="name" path="name" value="${patient.name}"/><form:errors path="name" /></td>
+
         </tr>
         <tr>
             <td ><input name="submit" type="submit"  id="submit" value="Submit"/></td>

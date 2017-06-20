@@ -1,6 +1,6 @@
 -- Database: nhsdatabase
 
-DROP DATABASE nhsdatabase;
+--DROP DATABASE nhsdatabase;
 
 CREATE DATABASE nhsdatabase
   WITH OWNER = postgres
