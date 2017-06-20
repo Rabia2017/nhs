@@ -41,8 +41,8 @@ public class PatientDaoTest {
     @Test
     public void savePatient(){
         Patient patient = new Patient(1,"Alpha");
-        when(patientDao.savePatient(patient)).thenReturn(patient);
-        patient = patientDao.savePatient(patient);
+        when(patientDao.saveOrUpdatePatient(patient)).thenReturn(patient);
+        patient = patientDao.saveOrUpdatePatient(patient);
         assertEquals(new Long(1),new Long(patient.getId()));
     }
 

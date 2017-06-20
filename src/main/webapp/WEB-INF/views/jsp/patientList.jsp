@@ -22,18 +22,34 @@
 
    <td colspan="2"><c:out value="${patient.id}"/></td>
     <td colspan="2"><c:out value="${patient.name}"/></td>
-   <form method="post" modelAttribute="patient" action="patientForm/id=${patient.id}" ><td ><input type="submit" value="Update" /></td> </form>
-    <td ><input type="delete" value="Delete" onclick=""/></td>
+
+   <c:url var="updateUrl" value="/patientForm"/>
+      <form id="${patientUpdateId}" action="${updateUrl}" method="POST">
+     <td ><input id="id" name="id" type="hidden" value="${patient.id}" />
+      <input type="submit" value="update" onClick=""/>
+     </td>
+   </form>
+
+      <td>
+       <c:url var="deleteUrl" value="/patientList/delete.html"/>
+       <form id="${patientFormId}" action="${deleteUrl}" method="POST">
+        <input id="patient" name="patient" type="hidden" value="${patient.id}"/>
+        <input type="submit" value="delete" onClick="return confirm('Are you sure you want to delete {} ' + ${patient.name})"/>
+       </form>
+      </td>
+
+      </tr>
+
+
+     </c:forEach>
+
+     <tr>
+      <a href="patientForm.html">Add More Patient</a>
      </tr>
-  </c:forEach>
 
-  <tr>
-   <a href="patientForm.html">Add More Patient</a>
-  </tr>
+    </table>
+   </c:if>
 
- </table>
-</c:if>
+   </body>
 
-</body>
-
-</html>
+   </html>

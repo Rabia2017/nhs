@@ -18,8 +18,8 @@ public class PatientDao implements IPatientDao {
 
     @Override
     @Transactional
-    public Patient savePatient(Patient patient) {
-            hibernateTemplate.save(patient);
+    public Patient saveOrUpdatePatient(Patient patient) {
+            hibernateTemplate.saveOrUpdate(patient);
             return patient;
     }
 

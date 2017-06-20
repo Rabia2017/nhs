@@ -8,7 +8,7 @@ import java.util.List;
  * Created by rabia on 17/06/17.
  */
 public interface IPatientDao {
-     Patient savePatient(Patient patient);
+     Patient saveOrUpdatePatient(Patient patient);
      Patient deletePatient(Patient patient);
      List<Patient> listAllPatients();
      public Patient getPatientById(Integer patientId);
