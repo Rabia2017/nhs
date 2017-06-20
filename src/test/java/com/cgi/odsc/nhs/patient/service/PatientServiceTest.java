@@ -52,7 +52,7 @@ public class PatientServiceTest {
         //Mockito.when(patientDao.savePatient(patient)).thenReturn(patient);
 
         // In code below patient first argument Id is initialized
-        Mockito.when(patientService.savePatient(patient))
+        Mockito.when(patientService.saveOrUpdatePatient(patient))
                 .thenAnswer(new Answer<Patient>() {
                     @Override
                     public Patient answer(InvocationOnMock invocation) {
@@ -64,7 +64,7 @@ public class PatientServiceTest {
 
         assertEquals(null,patient.getId());
         //log.info("before save ");
-        patient = patientService.savePatient(patient);
+        patient = patientService.saveOrUpdatePatient(patient);
         assertNotEquals(new Long(0),new Long(patient.getId()));
         //log.info("after save " +patient.getId());
         assertTrue(patient.getId() > 0);

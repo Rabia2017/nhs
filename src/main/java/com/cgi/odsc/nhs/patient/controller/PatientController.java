@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -51,7 +52,7 @@ public class PatientController {
 
     @RequestMapping(value = "/submit",params = "submit", method= RequestMethod.POST)
     public ModelAndView submit(@ModelAttribute("patient") Patient patient){
-        patientService.savePatient(patient);
+        patientService.saveOrUpdatePatient(patient);
         return new ModelAndView("redirect:/patientList");
     }
 
@@ -61,17 +62,20 @@ public class PatientController {
     }
 
 
-    @RequestMapping(value = "/patientList/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/patientForm",method = RequestMethod.POST)
     public ModelAndView updatePatient(@RequestParam("id") int id
                                       )throws NHSException
     {
         //Patient patient= patientService.getPatientById(id);
 
-        ModelAndView model = new ModelAndView();
-        model.addObject("patient",patientService.getPatientById(id));
-        model.addObject("view","/patientForm" );
+        if (!ObjectUtils.isEmpty(patientService.getPatientById(id))) {
+            ModelAndView model = new ModelAndView();
+            model.addObject("patient", patientService.getPatientById(id));
+            model.addObject("view", "/patientForm");
 
-        return model;
+            return model;
+        }
+         return new ModelAndView("/patientList");
     }
 
     @RequestMapping(value = "patientList/delete",method = RequestMethod.POST)

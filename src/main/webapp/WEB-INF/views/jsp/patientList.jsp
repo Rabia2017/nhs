@@ -23,21 +23,13 @@
    <td colspan="2"><c:out value="${patient.id}"/></td>
     <td colspan="2"><c:out value="${patient.name}"/></td>
 
-   <c:url var="updateUrl" value="/patientList/update.html"/>
+   <c:url var="updateUrl" value="/patientForm"/>
       <form id="${patientUpdateId}" action="${updateUrl}" method="POST">
      <td ><input id="id" name="id" type="hidden" value="${patient.id}" />
       <input type="submit" value="update" onClick=""/>
      </td>
    </form>
 
-    <%--<td ><input type="delete" value="Delete" onclick=""/></td> --%>
-   <%--
-      <c:url var="updateUrl" value="/patientList/update.html"/>
-      <form id="${patientUpdateId}" action="${updateUrl}" method="POST">
-       <input id="patientId" name="patientId" type="hidden" value="${patient.id}"/>
-       <input type="submit" value="update" />
-      </form>
-   --%>
       <td>
        <c:url var="deleteUrl" value="/patientList/delete.html"/>
        <form id="${patientFormId}" action="${deleteUrl}" method="POST">

@@ -34,9 +34,9 @@ public class PatientService implements IPatientService {
     }
 
     @Override
-    public Patient savePatient(Patient patient) {
+    public Patient saveOrUpdatePatient(Patient patient) {
         if(!ObjectUtils.isEmpty(patient))
-            patientDao.savePatient(patient);
+            patientDao.saveOrUpdatePatient(patient);
         return patient;
     }
 

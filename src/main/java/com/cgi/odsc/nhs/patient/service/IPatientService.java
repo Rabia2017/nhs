@@ -11,7 +11,7 @@ import java.util.List;
 public interface IPatientService {
 
     List<Patient> getPatients();
-    Patient savePatient(Patient patient);
+    Patient saveOrUpdatePatient(Patient patient);
     Patient deletePatient(Patient patient);
     public Patient getPatientById(Integer id) throws NHSException;
     public void updatePatient(Patient patient);
