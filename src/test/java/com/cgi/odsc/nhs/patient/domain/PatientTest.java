@@ -32,4 +32,16 @@ public class PatientTest {
         assertEquals("alpha", patient.getName());
     }
 
+    @Test
+    public void PatientEntityValidationTest(){
+        assertSame(1,patient.getId());
+        try {
+            patient = new Patient(2, "11111111111");
+        }
+        catch(Exception e) {
+            assertEquals("Please enter valid name", e.getMessage());
+        }
+    }
+
+
 }

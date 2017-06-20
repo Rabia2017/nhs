@@ -14,7 +14,7 @@
     <table>
         <tr>
             <td ><form:label path="id">Patient ID:</form:label></td>
-            <td ><form:input path="id" value="${patient.id}" /></td>
+            <td ><form:input path="id" value="${patient.id}" readonly="true" /></td>
         </tr>
         <tr>
             <td ><form:label path="name">Patient Name:</form:label></td>
