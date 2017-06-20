@@ -7,13 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by rabia on 17/06/17.
@@ -62,9 +61,9 @@ public class PatientController {
     }
 
 
-    @RequestMapping(value = "/patientForm/{id}",method = RequestMethod.POST)
-    public ModelAndView updatePatient(@PathVariable int id,
-                                      HttpServletRequest request, @ModelAttribute("patient") Patient patient)throws NHSException
+    @RequestMapping(value = "/patientList/update",method = RequestMethod.POST)
+    public ModelAndView updatePatient(@RequestParam("id") int id
+                                      )throws NHSException
     {
         //Patient patient= patientService.getPatientById(id);
 
@@ -75,11 +74,17 @@ public class PatientController {
         return model;
     }
 
-    @RequestMapping(value = "/patientForm/{patient}",method = RequestMethod.DELETE)
-    public ModelAndView deletePatient(@ModelAttribute("patient") Patient patient, HttpServletRequest request)throws NHSException
-    {
-        patientService.deletePatient(patient);
-        return new ModelAndView("redirect:/patientList");
+    @RequestMapping(value = "patientList/delete",method = RequestMethod.POST)
+    public String delete(@RequestParam("patient") int id){
+       try {
+           Patient patient = patientService.getPatientById(id);
+           patientService.deletePatient(patient);
+           return "redirect:/patientList";
+       }
+       catch (NHSException nhsException){
+           log.info(nhsException.getMessage());
+           return "/error";
+       }
     }
 
 

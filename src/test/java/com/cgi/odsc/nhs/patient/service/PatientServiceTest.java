@@ -17,9 +17,7 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 /**
@@ -80,7 +78,7 @@ public class PatientServiceTest {
 
         assertEquals(new Long(1),new Long(patient.getId()));
         patient = patientService.deletePatient(patient);
-        assertEquals(null,patient);
+        assertNotNull(patient);
     }
 
 

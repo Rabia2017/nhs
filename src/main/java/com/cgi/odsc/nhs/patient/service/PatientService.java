@@ -44,7 +44,7 @@ public class PatientService implements IPatientService {
     public Patient deletePatient(Patient patient) {
         if(!ObjectUtils.isEmpty(patient))
             patientDao.deletePatient(patient);
-        return null;
+        return patient;
     }
 
     public Patient getPatientById(Integer id) throws NHSException{
