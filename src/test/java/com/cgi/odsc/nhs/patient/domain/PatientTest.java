@@ -1,6 +1,5 @@
 package com.cgi.odsc.nhs.patient.domain;
 
-import com.cgi.odsc.nhs.patient.domain.Patient;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +41,4 @@ public class PatientTest {
             assertEquals("Please enter valid name", e.getMessage());
         }
     }
-
-
 }
