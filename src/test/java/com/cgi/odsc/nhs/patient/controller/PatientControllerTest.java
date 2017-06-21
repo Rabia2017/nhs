@@ -19,7 +19,7 @@ public class PatientControllerTest {
     public void SetUp(){}
 
     @Test
-    public void getPatients(){
+    public void getPatientsTest(){
 
     }
 
