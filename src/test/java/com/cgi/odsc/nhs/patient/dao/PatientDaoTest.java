@@ -86,8 +86,6 @@ public class PatientDaoTest {
     public void listAllPatientsTest(){
         patients = new ArrayList<Patient>();
 
-        patients = hibernateTemplate.loadAll(Patient.class);
-        assertEquals(0,patients.size());
         patients.add(Patient.builder().id(1).name("alpha").build());
         patients.add(Patient.builder().id(2).name("beta").build());
         patients.add(Patient.builder().id(3).name("theta").build());
