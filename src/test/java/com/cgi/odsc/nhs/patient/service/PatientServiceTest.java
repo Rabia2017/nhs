@@ -31,7 +31,6 @@ public class PatientServiceTest {
     List<Patient> patients;
     @Mock
     private IPatientDao patientDao;
-    //private IPatientService patientService;
 
     @Before
     public void doSetUp() throws NHSException{
@@ -86,18 +85,9 @@ public class PatientServiceTest {
 
     @Test
     public void getPatientsTest(){
-        int size = patientDao.listAllPatients().size();
-        org.junit.Assert.assertSame(0,size);
-
         Mockito.when(patientDao.listAllPatients()).thenReturn(patients);
         patients=patientDao.listAllPatients();
 
         org.junit.Assert.assertSame(3,patients.size());
-
     }
-
-
-
-
-
 }
