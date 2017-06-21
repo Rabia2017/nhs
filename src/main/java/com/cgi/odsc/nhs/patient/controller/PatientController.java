@@ -8,11 +8,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 /**
  * Created by rabia on 17/06/17.
@@ -34,7 +38,7 @@ public class PatientController {
     }
 
 
-    @RequestMapping(value = "/patientList", method= RequestMethod.GET)
+    @RequestMapping(value = "/patientList",method= RequestMethod.GET)
     public ModelAndView getlists( ){
 
         ModelAndView model = new ModelAndView();
@@ -50,8 +54,12 @@ public class PatientController {
 
 
     @RequestMapping(value = "/submit",params = "submit", method= RequestMethod.POST)
-    public ModelAndView submit(@ModelAttribute("patient") Patient patient){
-        patientService.savePatient(patient);
+    public ModelAndView submit(@Valid @ModelAttribute("patient") Patient patient, BindingResult result){
+        if(result.hasErrors())
+        {
+                return new ModelAndView("/patientForm");
+        }
+        patientService.saveOrUpdatePatient(patient);
         return new ModelAndView("redirect:/patientList");
     }
 
@@ -61,17 +69,20 @@ public class PatientController {
     }
 
 
-    @RequestMapping(value = "/patientList/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/patientForm",method = RequestMethod.POST)
     public ModelAndView updatePatient(@RequestParam("id") int id
                                       )throws NHSException
     {
         //Patient patient= patientService.getPatientById(id);
 
-        ModelAndView model = new ModelAndView();
-        model.addObject("patient",patientService.getPatientById(id));
-        model.addObject("view","/patientForm" );
+        if (!ObjectUtils.isEmpty(patientService.getPatientById(id))) {
+            ModelAndView model = new ModelAndView();
+            model.addObject("patient", patientService.getPatientById(id));
+            model.addObject("view", "/patientForm");
 
-        return model;
+            return model;
+        }
+         return new ModelAndView("/patientList");
     }
 
     @RequestMapping(value = "patientList/delete",method = RequestMethod.POST)

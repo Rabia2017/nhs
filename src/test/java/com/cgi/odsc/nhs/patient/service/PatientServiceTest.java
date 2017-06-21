@@ -1,5 +1,6 @@
 package com.cgi.odsc.nhs.patient.service;
 
+import com.cgi.odsc.nhs.patient.dao.IPatientDao;
 import com.cgi.odsc.nhs.patient.dao.PatientDao;
 import com.cgi.odsc.nhs.patient.domain.Patient;
 import com.cgi.odsc.nhs.exception.NHSException;
@@ -29,12 +30,11 @@ public class PatientServiceTest {
 
     List<Patient> patients;
     @Mock
-    private PatientDao patientDao;
-    private IPatientService patientService;
+    private IPatientDao patientDao;
+    //private IPatientService patientService;
 
     @Before
     public void doSetUp() throws NHSException{
-        patientService = new PatientService(patientDao);
 
         patients = new ArrayList<Patient>();
         patients.add(Patient.builder().id(1).name("alpha").build());
@@ -52,7 +52,7 @@ public class PatientServiceTest {
         //Mockito.when(patientDao.savePatient(patient)).thenReturn(patient);
 
         // In code below patient first argument Id is initialized
-        Mockito.when(patientService.savePatient(patient))
+        Mockito.when(patientDao.saveOrUpdatePatient(patient))
                 .thenAnswer(new Answer<Patient>() {
                     @Override
                     public Patient answer(InvocationOnMock invocation) {
@@ -64,7 +64,7 @@ public class PatientServiceTest {
 
         assertEquals(null,patient.getId());
         //log.info("before save ");
-        patient = patientService.savePatient(patient);
+        patient = patientDao.saveOrUpdatePatient(patient);
         assertNotEquals(new Long(0),new Long(patient.getId()));
         //log.info("after save " +patient.getId());
         assertTrue(patient.getId() > 0);
@@ -77,8 +77,8 @@ public class PatientServiceTest {
         patient.setName("John");
 
         assertEquals(new Long(1),new Long(patient.getId()));
-        patient = patientService.deletePatient(patient);
-        assertNotNull(patient);
+        patient = patientDao.deletePatient(patient);
+        assertEquals(null,patient);
     }
 
 
@@ -86,11 +86,11 @@ public class PatientServiceTest {
 
     @Test
     public void getPatientsTest(){
-        int size = patientService.getPatients().size();
+        int size = patientDao.listAllPatients().size();
         org.junit.Assert.assertSame(0,size);
 
-        Mockito.when(patientService.getPatients()).thenReturn(patients);
-        patients=patientService.getPatients();
+        Mockito.when(patientDao.listAllPatients()).thenReturn(patients);
+        patients=patientDao.listAllPatients();
 
         org.junit.Assert.assertSame(3,patients.size());
 

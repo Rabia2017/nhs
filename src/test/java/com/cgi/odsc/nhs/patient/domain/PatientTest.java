@@ -1,6 +1,5 @@
 package com.cgi.odsc.nhs.patient.domain;
 
-import com.cgi.odsc.nhs.patient.domain.Patient;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,4 +31,14 @@ public class PatientTest {
         assertEquals("alpha", patient.getName());
     }
 
+    @Test
+    public void PatientEntityValidationTest(){
+        assertSame(1,patient.getId());
+        try {
+            patient = new Patient(2, "11111111111");
+        }
+        catch(Exception e) {
+            assertEquals("Please enter valid name", e.getMessage());
+        }
+    }
 }
