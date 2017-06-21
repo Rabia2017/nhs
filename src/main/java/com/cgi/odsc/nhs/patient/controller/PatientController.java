@@ -39,7 +39,7 @@ public class PatientController {
 
 
     @RequestMapping(value = "/patients",method= RequestMethod.GET)
-    public ModelAndView getlists( ){
+    public ModelAndView getPatients( ){
 
         ModelAndView model = new ModelAndView();
         model.addObject("patients",patientService.getPatients());
