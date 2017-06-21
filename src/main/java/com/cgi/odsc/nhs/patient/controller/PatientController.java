@@ -38,12 +38,12 @@ public class PatientController {
     }
 
 
-    @RequestMapping(value = "/patientList",method= RequestMethod.GET)
+    @RequestMapping(value = "/patients",method= RequestMethod.GET)
     public ModelAndView getlists( ){
 
         ModelAndView model = new ModelAndView();
         model.addObject("patients",patientService.getPatients());
-        model.addObject("view","/patientList" );
+        model.addObject("view","/patients" );
         return model;
     }
 
@@ -60,12 +60,12 @@ public class PatientController {
                 return new ModelAndView("/patientForm");
         }
         patientService.saveOrUpdatePatient(patient);
-        return new ModelAndView("redirect:/patientList");
+        return new ModelAndView("redirect:/patients");
     }
 
     @RequestMapping(value = "/submit", params = "cancel", method = RequestMethod.POST)
     public ModelAndView cancel(HttpServletRequest request) {
-        return new ModelAndView("redirect:/patientList");
+        return new ModelAndView("redirect:/patients");
     }
 
 
@@ -82,15 +82,15 @@ public class PatientController {
 
             return model;
         }
-         return new ModelAndView("/patientList");
+         return new ModelAndView("/patients");
     }
 
-    @RequestMapping(value = "patientList/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "patients/delete",method = RequestMethod.POST)
     public String delete(@RequestParam("patient") int id){
        try {
            Patient patient = patientService.getPatientById(id);
            patientService.deletePatient(patient);
-           return "redirect:/patientList";
+           return "redirect:/patients";
        }
        catch (NHSException nhsException){
            log.info(nhsException.getMessage());

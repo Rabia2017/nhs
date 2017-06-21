@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2> Patients </h2>
-<h2>1. <a href="patientList.html">List of Patients</a></h2>
+<h2>1. <a href="patients.html">List of Patients</a></h2>
 <h2>2. <a href="patientForm.html">Add Patient</a></h2>
 </body>
 </html>

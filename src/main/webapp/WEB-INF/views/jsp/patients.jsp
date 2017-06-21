@@ -31,7 +31,7 @@
    </form>
 
       <td>
-       <c:url var="deleteUrl" value="/patientList/delete.html"/>
+       <c:url var="deleteUrl" value="/patients/delete.html"/>
        <form id="${patientFormId}" action="${deleteUrl}" method="POST">
         <input id="patient" name="patient" type="hidden" value="${patient.id}"/>
         <input type="submit" value="delete" onClick="return confirm('Are you sure you want to delete {} ' + ${patient.name})"/>
