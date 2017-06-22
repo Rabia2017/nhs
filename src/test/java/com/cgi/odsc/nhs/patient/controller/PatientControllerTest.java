@@ -28,12 +28,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.mockito.Mockito.atMost;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -85,7 +83,7 @@ public class PatientControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("patients",expectedPatients))
                 .andExpect(view().name("patients"));
-        verify(mockPatientService,atMost(1));
+        verify(mockPatientService,atMost(1)).getPatients();
     }
 
 
@@ -106,9 +104,7 @@ public class PatientControllerTest {
                 .andDo(print())
                 .andExpect(view().name("redirect:/patients"))
                 .andReturn();
-
-
-
+        verify(mockPatientService,atMost(1)).deletePatient(patient);
     }
 
 
@@ -123,6 +119,7 @@ public class PatientControllerTest {
                 .andExpect(model().attribute("patient",mockPatientService.
                         getPatientById(patient.getId())))
                 .andExpect(view().name("patientForm"));
+        verify(mockPatientService,atLeast(1)).getPatientById(patient.getId());
     }
 
     @Test
@@ -135,7 +132,8 @@ public class PatientControllerTest {
                 .andExpect(model().attribute("patient",mockPatientService.
                         getPatientById(patient.getId())))
                 .andExpect(view().name("/patients"))
-        ;
 
+        ;
+        verify(mockPatientService,atLeast(1)).getPatientById(patient.getId());
     }
 }
