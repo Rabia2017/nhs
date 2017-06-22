@@ -115,13 +115,4 @@ public class PatientControllerTest {
         ;
 
     }
-    @After
-    public void executeAfterEachTestCase(){
-        patientDao = null;
-        mockPatientService =null;
-
-    }
-
-
-
 }
