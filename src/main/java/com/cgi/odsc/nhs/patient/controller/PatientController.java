@@ -73,8 +73,6 @@ public class PatientController {
     public ModelAndView updatePatient(@RequestParam("id") int id
                                       )throws NHSException
     {
-        //Patient patient= patientService.getPatientById(id);
-
         if (!ObjectUtils.isEmpty(patientService.getPatientById(id))) {
             ModelAndView model = new ModelAndView();
             model.addObject("patient", patientService.getPatientById(id));
