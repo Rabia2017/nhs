@@ -8,6 +8,7 @@ import com.cgi.odsc.nhs.patient.dao.PatientDao;
 import com.cgi.odsc.nhs.patient.domain.Patient;
 import com.cgi.odsc.nhs.patient.service.IPatientService;
 import com.cgi.odsc.nhs.patient.service.PatientService;
+//import lombok.extern.slf4j.Slf4j;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
