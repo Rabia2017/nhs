@@ -85,6 +85,7 @@ public class PatientControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("patients",expectedPatients))
                 .andExpect(view().name("patients"));
+        verify(mockPatientService,atMost(1));
     }
 
 
@@ -106,7 +107,7 @@ public class PatientControllerTest {
                 .andExpect(view().name("redirect:/patients"))
                 .andReturn();
 
-         verify(mockPatientService,atMost(1));
+
 
     }
 
